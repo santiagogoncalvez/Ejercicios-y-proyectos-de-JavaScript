@@ -1,0 +1,6 @@
+Frontend:
+es lo que ve el usuario y lo que se muestra
+
+Backend
+es lo que está por detrás de la interfaz del usuario
+

@@ -1,0 +1,125 @@
+/* Fuente que se va a utilizar en toda la pagina */
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Comfortaa', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding: 10rem;
+}
+
+#inicio {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(Imagenes/computadora-portatil-escritorio-diagrama-negocios-ilustracion-isometrica_639772-38.webp);
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+}
+
+/* Todo el contenido del header */
+#inicio .contenido header {
+    background-color: rgba(27, 59, 111, 1);
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    top: 10;
+}
+
+
+#inicio .contenido header .contenido-header {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    color: rgb(255, 255, 255);
+}
+
+/* titulo del header */
+#inicio .contenido header .contenido-header h1 {
+    color: rgba(255, 255, 255, 0.883);
+    text-align: center;
+    font-size: 200%;
+    transform: rotate(.1deg) skew(-30deg);
+    text-shadow: 3px 2px .01px rgb(186, 186, 186);
+}
+
+
+#inicio .contenido header .contenido-header div h1:hover {
+    color: white;
+    transition: 1s;
+    cursor: pointer;
+}
+
+
+/* Barra de navegacion */
+/* elementos de la lista */
+#inicio .contenido header .contenido-header nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+#inicio .contenido header .contenido-header nav ul li a {
+    text-decoration: none;
+    color: white;
+    margin: 0 12px;
+    font-weight: 500px;
+    transition: 1s;
+}
+
+#inicio .contenido header .contenido-header nav ul li:hover {
+    color: rgba(158, 179, 194, 1);
+    font-size: 108%;
+    transition: .1s;
+}
+
+#inicio .contenido .presentacion {
+    max-width: 1100px;
+    height: 100vh;
+    margin: auto;
+    columns: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#inicio .contenido .presentacion {
+    color: white;
+}
+
+#inicio .contenido .presentacion .bienvenida {
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+}
+
+#inicio .contenido .presentacion h2 {
+    font-size: 55px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+#inicio .contenido .presentacion h2 span {
+    font-size: 25px;
+}
+
+#inicio .contenido .presentacion a {
+    background-color: white;
+    color: rgba(28, 114, 147, 1);
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 40px;
+    border: 2.5px solid rgba(28, 114, 147, 1);
+}
+
+#inicio .contenido .presentacion p {
+    margin-bottom: 25px;
+}

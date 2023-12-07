@@ -1,0 +1,39 @@
+html:
+<input id="tarea" type="text" placeholder="Introduce la tarea">
+<input id="boton" value="Agregar tarea">
+<h1>Mis tareas</h1>
+<hr>
+<ul>
+  <li>Investigar sobre desarrollo web</li>
+  <li>Aprender sobre desarrollo web</li>
+  <li>Aprender una habilidad monetizable antes de fin de año</li>
+  <li>Aprobar el examen de la facultad</li>
+  <li>Educarme financieramente</li>
+  <li>Investigar como es la facultad y que me va a enseñar</li>
+</ul>
+
+CSS:
+body {
+  background-color: beige;
+  font-family: sans-serif;
+}
+#boton {
+  display: block;
+}
+
+JS:
+//seleccionar los elementos HTML que necesitamos
+var input = document.getElementById("tarea")
+var boton = document.getElementById("boton")
+var tareas = document.querySelector("ul")
+
+//Cuando se haga click en el botón
+boton.addEventListener("click", function() {
+  //Obtener lo que hay escrito en el <input>
+  var tarea = input.value
+  
+  //Azadirlo como un nuevo elemento <li>
+  var li = document.createElement("li")
+  li.textContent = tarea
+  tareas.appendChild(li)
+})
