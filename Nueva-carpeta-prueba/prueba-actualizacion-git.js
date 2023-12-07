@@ -1,1 +1,3 @@
-console.log("Actualizacion de archivos de git");
+function prueba () {
+    console.log("Prueba de acutalizacion de github");
+}
