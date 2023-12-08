@@ -1,0 +1,10 @@
+{
+    "editor.fontFamily": "Rubik ExtraLight, Consolas, 'Courier New', monospace",
+    "editor.fontVariations": false,
+    "editor.fontLigatures": true,
+    "editor.tabSize": 4,
+    "editor.lineHeight": 22,
+    "chat.editor.lineHeight": 0,
+    "terminal.integrated.lineHeight": 0,
+    "debug.console.lineHeight": 40,
+}
