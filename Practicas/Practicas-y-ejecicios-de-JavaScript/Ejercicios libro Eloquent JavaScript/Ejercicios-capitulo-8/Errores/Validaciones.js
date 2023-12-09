@@ -16,6 +16,6 @@ export const validateUser = ({ name, age, email } = {}) => {
         // Por ejemplo: enviar traza original a un servicio nuestro
         // sendBeaconError(e)
         throw new CreateConnectionError("database is not available");
-    }
+    };
 
 };

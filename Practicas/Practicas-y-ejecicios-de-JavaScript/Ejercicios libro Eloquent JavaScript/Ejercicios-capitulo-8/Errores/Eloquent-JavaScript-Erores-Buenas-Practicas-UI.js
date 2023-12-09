@@ -19,5 +19,5 @@ try {
     if (e instanceof CreateValidationError) {
         // showUIModalValidation()
         console.log("Error");
-    }
+    };
 };
