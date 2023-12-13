@@ -275,3 +275,147 @@ function minusOne (match, amount, unit) {
 }
 
 console.log(stock.replace(/(\d+) (\w+)/g, minusOne));
+
+
+
+// Funcion que elimina todos los comentarios de un fragmento de un código:
+function stripComments(code) {
+    return code.replace(/\/\/.*|\/\*[^]*?\*\//g, "");
+  }
+
+console.log(stripComments("1 + /*2*/ 3"));
+console.log(stripComments("x = 10; //ten!"));
+console.log(stripComments("1 /*a*/ + /*b*/ 1"));
+
+
+
+//Los operadores de repeticion (+, *, ?, {}) son codiciosos, coinciden tanto como pueden y retroceden desde ahi. Si se coloca un signo de interrogación después de ellos (+?, *?, ??, {}?) los vuelve no-codiciosos, y coinciden lo menos posible.
+
+console.log("1 /*a*/ + /*b*/ 1".replace(/\/\/.*|\/\*[^]*\*\//g, ""));
+console.log("1 /*a*/ + /*b*/ 1".replace(/\/\/.*|\/\*[^]*?\*\//g, ""));
+
+
+
+/*➡️Creando objetos dinamicamente*/
+
+// Buscar el nombre del usuario en un texto y encerrarlo en caracteres de subrayado para que destaque:
+let name = "Harry";
+let text2 = "Harry is a suspicious character";
+let regexp = new RegExp("\\b(" + name + ")\\b", "gi")
+console.log(text2.replace(regexp, "_$1_"));
+
+
+//✔️ Dato: Al crear marcadores de limite \b, hay que usar dos barras invertidas porque se están escribiendo en un string normal.
+
+
+// Si un nombre tiene caracteres especiales se puede agregar barras inversas adelante de cualquier caracter especial:
+let name2 = "dea+hl[]rd";
+let text3 = "This dea+hl[]rd guy is super annoying";
+let escaped = name2.replace(/[\\[.+*?(){|^$]/g, "\\$&");      // Agregar adelante de cada caracter especial una barra inversa
+let regexp2 = new RegExp("\\b(" + escaped + ")\\b");
+console.log(text3.replace(regexp2, "_$&_"));
+
+
+
+
+/*➡️El metodo search*/
+// El método indexof no puede invocarse en una expresión regular. Pero hay otro método search ("buscar"), que espera una expresión regular y retorna el primer índice que encontró en la expresión o -1 cuando no se encontró:
+console.log("  word".search(/\S/));
+console.log("   ".search(/\S/));
+
+
+
+
+
+/*➡️El metodo search*/
+// Los objetos de expresión regular tienen una propiedad lastIndex ("ultimo índice") que controla, en algunas circunstancias limitadas donde comenzará la siguiente coincidencia. Esas circunstancias son que la expresión regular debe tener la opcion global (g) o adhesiva (y), habilitada, y la coincidencia debe suceder a través del método exec:
+let pattern = /y/g;
+pattern.lastIndex = 3;
+let match3 = pattern.exec("xyzzy");
+console.log(match3.index);
+console.log(pattern.lastIndex);
+
+
+// ✔️Dato: si la coincidencia fue exitosa, la llamada actualiza automaticamente a la propiedad lastIndex para que apunte despés de la coincidencia. Si no se encontraron coincidencias lastiIndex vuelve a 0.
+
+// ✔️Dato: la diferencia entre las opciones globales y adhesivas es que cuando el adhesivo esta habilitado, la coincidencia colo tendrá exito si comienza directamente en lastIndex, mientras que con global buscará una posición donde pueda comenzar la coincidencia.
+
+let global = /abc/g;
+console.log(global.lastIndex);
+console.log(global.exec("xyz abc"));
+
+let sticky = /abc/y;
+console.log(sticky.lastIndex);
+console.log(sticky.exec("xyz abc"));
+
+
+
+// ❗Importante: cuando se usa un valor de expresión compartido para múltiples llamadas a exec, estas actualizan automáticamente la propiedad, y pueden causar problemas:
+let digit = /\d/g;
+console.log(digit.exec("aqui esta: 1"));
+console.log(digit.exec("aqui esta: 1"));
+
+
+
+// La opción global cambia la forma en que funciona el método match en strings. Cuando se llama con una expresión global en vez de retornar una matriz similar a la que retorna exec, match encontrará todas las coincidencias del patrón en el string y retorna un array que contiene los strings coincidentes:
+console.log("Banana".match(/an/g));
+
+
+
+// ❗Importante: Tener cuidado con las expresiones regulares globales. Usarlas donde sean necesarias, por ejemplo en llamadas a replace y lugares donde se desea llamar explicitamente a lastIndex, estos son los únicos lugares donde se deberían usar.
+
+
+
+
+
+
+/*➡️Ciclos sobre coincidencias*/
+// Escanear todas las ocurrencias de un patron en un string mediante lastIndex y exec:
+let input = "A string with 3 numbers in it... 42 and 88.";
+let number2 = /\b\d+\b/g;
+let match5;
+while (match5 = number2.exec(input)) {
+  console.log("Found", match5[0], "at", match5.index);
+};
+
+
+//El valor de una expresión de asignación (=) es el valor asignado.
+
+
+
+
+
+/*➡️Análisi de un archivo INI*/
+// Leer la informacion de un archivo de configuracion tipo INI:
+
+// La tarea es convertir un string del tipo INI en un objeto cuyas propiedades sean: antes de la primera seccion van las propiedades sin seccion, y luego van los nombres de las secciones como propiedades, y sus valores son objetos que contienen las configuraciones de esa sección.
+
+
+// ✔️Dato: Algunos sistemas operativos, sin embargo, usan no soloun carácter de nueva línea para separar lineas sino un carácter de retorno decarro seguido de una nueva línea ("\r\n").
+
+// ✔️Dato: el método split permite una expresión regular como argumento.
+
+
+function parseINI (string) {
+    // Empezar con un objeto para mantener los campos de nivel superior
+    let result = {};
+    let section = result;
+    string.split(/\r?\n/).forEach(line => {
+        let match;
+        if (match = line.match(/^(\w+)=(.*)$/)) {
+            section[match[1]] = match[2];
+        } else if (match = line.match(/^\[(.*)\]$/)) {
+            section = result[match[1]] = {};
+        } else if (!/^\s*(;.*)?$/.test(line)) {
+            throw new Error("Line ´" + line + "'is not valid.");
+        }
+    });
+
+    return result;
+}
+
+console.log(parseINI(`
+name=Vasilis
+[address]
+city=Tessaloniki`
+));
