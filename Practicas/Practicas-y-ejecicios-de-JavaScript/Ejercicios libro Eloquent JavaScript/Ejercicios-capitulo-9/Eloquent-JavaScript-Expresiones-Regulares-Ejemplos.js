@@ -319,7 +319,7 @@ console.log(text3.replace(regexp2, "_$&_"));
 
 
 /*➡️El metodo search*/
-// El método indexof no puede invocarse en una expresión regular. Pero hay otro método search ("buscar"), que espera una expresión regular y retorna el primer índice que encontró en la expresión o -1 cuando no se encontró:
+// El método indexof no puede invocarse en una expresión regular. Pero hay otro método search ("buscar"), que espera una expresión regular y retorna el primer índice en el que encontró la expresión o -1 cuando no se encontró:
 console.log("  word".search(/\S/));
 console.log("   ".search(/\S/));
 
@@ -380,3 +380,40 @@ while (match5 = number2.exec(input)) {
 
 
 //El valor de una expresión de asignación (=) es el valor asignado.
+
+
+
+
+
+
+/*➡️Caracteres internacionales*/
+
+//Una palabra caracter es solo uno de los 26 caracteres del alfabeto latino (mayúsculas y minúsculas), dígitos decimales y el caracter de guion bajo.
+// Cosas como é o ß no coincidiran con \w (y si coincidirán con \W, categoría no palabra):
+
+console.log(/\w/.test("ß"));
+console.log(/\W/.test("ß"));
+
+
+// ✔️Dato:
+// Las expresiones regulares funcionan en unidades de código, no en caracteres reales:
+
+console.log(/🍎{3}/.test("🍎🍎🍎"));
+
+
+// Para tratar de forma correcta con caracteres reales hay que agregar la opción u (para Unicode) a la expresión regular:
+
+console.log(/🍎{3}/u.test("🍎🍎🍎"));
+
+
+
+// Es posible usar \p en una expresión regular para que coincida coincida con todos los caracteres a los que el standar Unicode asigna una propiedad determinada:
+
+console.log(/\p{Script=Greek}/u.test("α"));
+console.log(/\p{Script=Arabic}/u.test("α"));
+console.log(/\p{Alphabetic}/u.test("α"));
+console.log(/\p{Alphabetic}/u.test("!"));
+
+//Notación: \p{Property=Value}
+
+// Si el nombre de la propiedad se deja afuera, \p{Name} se asume que el nombre es una propiedad binaria, como Alphabetic.
