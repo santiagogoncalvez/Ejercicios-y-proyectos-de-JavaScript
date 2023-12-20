@@ -1,4 +1,4 @@
-// funcion que compara 2 valores para ver si tienen el mismo valor 
+                                                                                                                                            // funcion que compara 2 valores para ver si tienen el mismo valor 
 // o si son objetos con las mismas propiedades:
 
 function igualdadProfunda(valor1, valor2) {
