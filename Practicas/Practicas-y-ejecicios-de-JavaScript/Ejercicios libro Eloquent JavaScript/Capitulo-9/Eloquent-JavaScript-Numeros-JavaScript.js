@@ -1,11 +1,11 @@
 // Capítulo 9, Ejercicio Números otra vez.
 
 // El numero que hice yo:
-let number = /^[+\-]?(\d+(\.\d*)?|\.\d+)$|^\d+[eE]([+\-]?\d+)$/;
+// let number = /^[+\-]?(\d+(\.\d*)?|\.\d+)$|^\d+[eE]([+\-]?\d+)$/;
 
 
 // El resultado del libro:
-// let number = /^[+\-]?(\d+(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/
+let number = /^[+\-]?(\d+(\.\d*)?|\.\d+)([eE][+\-]?\d+)?$/
 
 // Tests:
 for (let str of ["1", "-1", "+15", "1.55", ".5", "5.", "13e2", "1E-4", "1e+12"]) {
