@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "date-names": "^0.1.13",
+    "ini": "^4.1.1",
     "ordinal": "^1.0.3"
   }
 }
