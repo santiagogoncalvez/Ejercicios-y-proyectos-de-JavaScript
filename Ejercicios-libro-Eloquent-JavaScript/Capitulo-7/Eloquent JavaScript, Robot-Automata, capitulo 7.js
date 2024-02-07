@@ -102,30 +102,6 @@ EstadoPueblo.aleatorio = function (numeroDePaquetes = 5) {
 };
 
 
-/*
-let primero = new EstadoPueblo(
-    "Oficina de Correos",
-    [{ lugar: "Casa de Bob", direccion: "Casa de Alicia" }]
-);
-let siguiente = primero.mover("Casa de Alicia");
-let siguiente2 = siguiente.mover("Casa de Bob");
-let siguiente3 = siguiente2.mover("Ayuntamiento");
-let siguiente4 = siguiente3.mover("Tienda");
-let siguiente5 = siguiente4.mover("Ayuntamiento");
-let siguiente6 = siguiente5.mover("Casa de Bob");
-let siguiente7 = siguiente6.mover("Casa de Alicia");
-
-
-console.log(siguiente.paquetes[0]);
-console.log(siguiente2);
-console.log(siguiente3);
-console.log(siguiente4);
-console.log(siguiente5);
-console.log(siguiente6);
-console.log(siguiente7);
-*/
-
-
 
 // Funcion que pone en funcionamiento al robot
 function correrRobot(estado, robot, memoria) {
@@ -146,7 +122,7 @@ function correrRobot(estado, robot, memoria) {
 }
 
 
-// Funcion que retorna una funcion aleatoria.
+// Funcion que retorna una direccion aleatoria.
 function eleccionAleatoria(array) {
     let eleccion = Math.floor(Math.random() * array.length);
 
