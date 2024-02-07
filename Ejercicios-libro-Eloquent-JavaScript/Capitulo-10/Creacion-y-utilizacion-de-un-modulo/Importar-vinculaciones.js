@@ -19,7 +19,7 @@ console.log(plusTwo(1));
 
 
 
-// Importar y cambiar el nombre de la vinculacion:
+// Importar y cambiar el nombre de la vinculacion con "as" (como):
 import { plusThree as addThree } from "./Exportar-vinculaciones.mjs";
 
 console.log(addThree(1));

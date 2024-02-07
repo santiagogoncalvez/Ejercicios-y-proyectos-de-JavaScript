@@ -37,7 +37,7 @@ function construirGrafo(bordes) {
 
 // Lista con los lugares a los que se puede ir desde cada punto
 const grafoCamino = construirGrafo(caminos);
-// console.log(grafoCamino);
+console.log(grafoCamino);
 
 
 

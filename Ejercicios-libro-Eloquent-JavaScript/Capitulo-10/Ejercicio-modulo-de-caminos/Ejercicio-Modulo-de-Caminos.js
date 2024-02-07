@@ -3,7 +3,7 @@
 
 
 // Dependencia de este modulo
-let buildGraph = require(/*dependencia "grafo" (exporta funcion para construir el grafo)*/)
+let buildGraph = require("./graph").graph;
 
 const roads = [
     "Casa de Alicia-Casa de Bob", "Casa de Alicia-Cabaña",
@@ -15,4 +15,10 @@ const roads = [
     "Mercado-Ayuntamiento", "Tienda-Ayuntamiento"
 ];
 
-exports.roadGraph = buildGraph;
+function separateStartEnd (roads) {
+    return roads.map(c => c.split("-"))
+}
+
+
+// crear grafo de caminos y exportarlo
+exports.roadGraph = buildGraph(separateStartEnd(roads));
