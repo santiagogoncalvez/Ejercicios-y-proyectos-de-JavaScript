@@ -19,4 +19,6 @@
     "terminal.integrated.cursorWidth": 3,
     "terminal.integrated.altClickMovesCursor": true,
     "terminal.integrated.cursorBlinking": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
 }

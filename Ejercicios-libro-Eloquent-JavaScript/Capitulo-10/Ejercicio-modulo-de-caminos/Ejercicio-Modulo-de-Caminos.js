@@ -3,7 +3,7 @@
 
 
 // Dependencia de este modulo
-let buildGraph = require("./graph").graph;
+let {buildGraph} = require("./graph");
 
 const roads = [
     "Casa de Alicia-Casa de Bob", "Casa de Alicia-Cabaña",
