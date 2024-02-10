@@ -1,6 +1,6 @@
 // Utilizar paquete dijkstrajs.js para crear grafo de caminos de autómata del capitulo 7:
 
-const roadGraph = require("./roadGraph").roadGraph;
+const {roadGraph} = require("./roadGraph");
 const { find_path } = require("../../node_modules/dijkstrajs");
 
 let graph = {};
@@ -17,3 +17,4 @@ for (let node of Object.keys(roadGraph)) {
 console.log(graph);
 
 console.log(find_path(graph, "Oficina de Correos", "Ayuntamiento"));
+
