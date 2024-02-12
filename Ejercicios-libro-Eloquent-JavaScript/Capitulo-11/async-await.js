@@ -21,7 +21,7 @@ const users = [
         age: 30
     }
 ];
-
+/*
 function getDataBase() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -46,10 +46,10 @@ console.log("1. Primero esto")
 getData()
 
 console.log("3. Tercero esto")
-
+*/
 
 /*
-- await espera una promesa, por lo tanto lo que llama await debe    retornar el resolve de la promesa con lo que queremos que nos devuelva.
+- await espera una promesa, por lo tanto lo que llama await debe retornar el resolve de la promesa con lo que queremos que nos devuelva.
 */
 
 // Tambien se puede usar await a nivel alto (top level) si tener que usarlo dentro de una funcion async:
@@ -73,6 +73,7 @@ console.log("1. Primero esto");
 
 let books = await getDataBase();
 console.log(books);
+console.log("hola")
 
 
 
