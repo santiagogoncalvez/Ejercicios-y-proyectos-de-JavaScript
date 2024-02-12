@@ -21,7 +21,8 @@ const users = [
         age: 30
     }
 ];
-/*
+
+
 function getDataBase() {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -46,7 +47,7 @@ console.log("1. Primero esto")
 getData()
 
 console.log("3. Tercero esto")
-*/
+
 
 /*
 - await espera una promesa, por lo tanto lo que llama await debe retornar el resolve de la promesa con lo que queremos que nos devuelva.

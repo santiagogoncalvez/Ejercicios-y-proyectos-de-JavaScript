@@ -1,8 +1,7 @@
 {
     "editor.fontWeight": "bold",
-    "editor.fontFamily": "Rubik Light, Consolas, 'Courier New', monospace",
+    "editor.fontFamily": "Rubik ExtraLight, Fira Code Light, Consolas, 'Courier New', monospace",
     "editor.fontVariations": true,
-    "editor.fontLigatures": true,
     "editor.tabSize": 4,
     "editor.lineHeight": 22,
     "chat.editor.lineHeight": 0,
@@ -13,7 +12,7 @@
     "debug.console.fontSize": 14,
     "terminal.integrated.fontWeight": "normal",
     "notebook.output.fontFamily": "Consolas",
-    "terminal.integrated.letterSpacing": 0.5,
+    "terminal.integrated.letterSpacing": 1,
     "terminal.integrated.cursorStyle": "line",
     "terminal.integrated.cursorStyleInactive": "outline",
     "terminal.integrated.cursorWidth": 3,
@@ -23,5 +22,10 @@
     "editor.formatOnSave": true,
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
-    }
+    },
+    "prettier.tabWidth": 4,
+    "editor.cursorWidth": 2,
+    "prettier.printWidth": 80,
+    "editor.fontLigatures": true,
+    "editor.letterSpacing": 2
 }
