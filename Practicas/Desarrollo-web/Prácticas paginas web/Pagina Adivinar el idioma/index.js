@@ -1,9 +1,16 @@
-// Imortar json que contiene todos los lenguajes
-import codigos from './Archivos-JSON/Codigos-de-escritura.json' assert { type: 'json' };
-import probabilidadesCodigos from './Archivos-JSON/Probabilidades-codigos-escritura.json' assert {type: 'json'};
+/*
+Mejorar la pagina, cambiar idea:
+mostrar un pais en imagen y que tengan que adivinar que idioma se habla en ese pais. es mas actual y no tan complicado como adivinar simbolos.
+Con el mismo formato de escribir el nombre y si es verdadero mostrarle informacion sobre el pais e informacion sobre el idioma. Y despues hacer un modo que sea al rever. te muestre el idioma y tenes que ubicarlo en un mapa terraqueo.
+*/
 
-// Metodos de caracteres:
-import {caracteresMetodos} from './pruebas.js/caracteres-metodos-modulo.mjs';
+// Imortar json que contiene todos los lenguajes
+import {codigos} from './Archivos-JSON/Codigos-de-escritura.mjs';
+import { unicodeAleatorio } from "./pruebas.js/caracteres-unicode-arial.mjs";
+
+// // Metodos de caracteres:
+import { caracteresMetodos } from './caracteres-metodos-modulo.mjs';
+
 
 // Informacion
 {
@@ -15,21 +22,17 @@ import {caracteresMetodos} from './pruebas.js/caracteres-metodos-modulo.mjs';
 
 // Variables
 const SCRIPTS = codigos;
-const simbolo = document.getElementById("simbolo");
+const simboloClase = document.getElementById("simbolo");
 const inputRespuesta = document.getElementById("respuesta");
 const inputBotonRespuesta = document.getElementById("boton-respuesta");
 const parrafoVerdadRespuesta = document.getElementById("parrafo-verdad-respuesta");
 const botonResetear = document.getElementById("boton-resetear");
-const rangosProbabilidades = probabilidadesCodigos;
-const listaDatos = document.getElementById("datos-lenguaje")
+const listaDatos = document.getElementById("datos-lenguaje");
 
-// Simbolo aleatorio
-let simboloAleatorio = caracteresMetodos.simboloAleatorioLeng(rangosProbabilidades);
-let codigoActual = caracteresMetodos.codigoCaracter(SCRIPTS, simboloAleatorio);
-console.log(caracteresMetodos.codigoCaracter(SCRIPTS, simboloAleatorio).name);
 
 // Introducir el simbolo aleatorio en el elemento html
-simbolo.innerText = String.fromCodePoint(simboloAleatorio);
+let codigoUnicode = unicodeAleatorio();
+simboloClase.innerText = String.fromCodePoint(codigoUnicode);
 
 
 
@@ -39,11 +42,13 @@ inputBotonRespuesta.addEventListener('click', function () {
 
     const textoIngresado = inputRespuesta.value;
 
-    if (textoIngresado.toLowerCase() == caracteresMetodos.codigoCaracter(SCRIPTS, simboloAleatorio).name.toLowerCase()) {
+    if (textoIngresado.toLowerCase() == caracteresMetodos.codigoCaracter(SCRIPTS, codigoUnicode).name.toLowerCase()) {
         parrafoVerdadRespuesta.innerText = "Verdadero";
-        caracteresMetodos.mostrarDatosLenguaje(codigoActual, listaDatos);
-    } else { parrafoVerdadRespuesta.innerText = "Falso"; 
-};
+        caracteresMetodos.mostrarDatosLenguaje(codigoUnicode, listaDatos);
+
+    } else {
+        parrafoVerdadRespuesta.innerText = "Falso";
+    };
 
     inputRespuesta.value = "";
 });
@@ -53,11 +58,12 @@ inputRespuesta.addEventListener('keydown', function (event) {
 
     if (event.key === 'Enter') {
         const textoIngresado = inputRespuesta.value;
-        if (textoIngresado.toLowerCase() == caracteresMetodos.codigoCaracter(SCRIPTS, simboloAleatorio).name.toLowerCase()) {
+        if (textoIngresado.toLowerCase() == caracteresMetodos.codigoCaracter(SCRIPTS, codigoUnicode).name.toLowerCase()) {
             parrafoVerdadRespuesta.innerText = "Verdadero";
-            caracteresMetodos.mostrarDatosLenguaje(codigoActual, listaDatos);
-        } else { 
-            parrafoVerdadRespuesta.innerText = "Falso"; 
+            caracteresMetodos.mostrarDatosLenguaje(codigoUnicode, listaDatos);
+            
+        } else {
+            parrafoVerdadRespuesta.innerText = "Falso";
         };
 
         inputRespuesta.value = "";
@@ -67,18 +73,15 @@ inputRespuesta.addEventListener('keydown', function (event) {
 
 // Resetear simbolo y respuesta
 botonResetear.addEventListener('click', function () {
-    simboloAleatorio = caracteresMetodos.simboloAleatorioLeng(rangosProbabilidades);
-    console.log("Simbolo " + simboloAleatorio);
-    simbolo.innerText = String.fromCodePoint(caracteresMetodos.simboloAleatorioLeng(rangosProbabilidades));
+    codigoUnicode = unicodeAleatorio();
+    simboloClase.innerText = String.fromCodePoint(codigoUnicode);
     inputRespuesta.value = "";
     parrafoVerdadRespuesta.innerText = "";
-    console.log(caracteresMetodos.codigoCaracter(SCRIPTS, simboloAleatorio).name);
 
 });
 
 
 // Mostrar los datos del lenguaje actual
-
 
 
 

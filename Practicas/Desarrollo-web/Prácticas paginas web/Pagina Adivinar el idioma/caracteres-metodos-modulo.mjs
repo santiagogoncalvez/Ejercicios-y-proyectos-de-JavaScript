@@ -40,12 +40,6 @@ export const caracteresMetodos = {
       Math.random() * (rangoElegido[1] - rangoElegido[0]) + rangoElegido[0]
     );
 
-    console.log("\n");
-    console.log("Codigo: " + numeroDentroDelRango);
-
-    console.log(
-      "prueba: " + String.fromCodePoint(numeroDentroDelRango).charCodeAt()
-    );
 
     return numeroDentroDelRango;
   },
