@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adidioma</title>
+        <script src="index.js" defer type="module"></script>
+        <link rel="icon" href="./Imagenes/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="index.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adidioma</title>
-    <script src="index.js" defer type="module"></script>
-    <link rel="icon" href="./Imagenes/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="index.css">
-</head>
+    <body>
+        <header>
+            <div>
+                <!-- Imagen y nombre de la pagina -->
+            </div>
+        </header>
 
-<body>
+        <section id="section-lenguaje">
+            <div id="section-contenido">
+                <h1>¿What language is this symbol part of??</h1>
+                <p id="simbolo"></p>
+                <input
+                    type="text"
+                    id="respuesta"
+                    placeholder="Write your answer"
+                />
+                <input type="button" value="Send" id="boton-respuesta" />
+                <p id="parrafo-verdad-respuesta"></p>
+                <p id="parrafo-informacion-idioma"></p>
+                <button id="boton-resetear">New symbol</button>
 
-    <header>
-        <div>
-            <!-- Imagen y nombre de la pagina -->
-        </div>
-    </header>
-
-    <section id="section-lenguaje">
-        <div id="section-contenido">
-            <h1>¿What language is this symbol part of??</h1>
-            <p id="simbolo"></p>
-            <input type="text" id="respuesta" placeholder="Write your answer">
-            <input type="button" value="Send" id="boton-respuesta">
-            <p id="parrafo-verdad-respuesta"></p>
-            <p id="parrafo-informacion-idioma"></p>
-            <button id="boton-resetear">New symbol</button>
-
-
-
-            <ul id="datos-lenguaje">
-                <!-- Lista con los datos del lenguaje actual -->
-            </ul>
-        </div>
-    </section>
-</body>
-
+                <ul id="datos-lenguaje">
+                    <!-- Lista con los datos del lenguaje actual -->
+                </ul>
+            </div>
+        </section>
+    </body>
 </html>

@@ -1,4 +1,4 @@
-[
+export const codigos = [
   {
     "name": "Adlam",
     "ranges": [
