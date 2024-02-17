@@ -146,12 +146,10 @@ everywhere(nest => {
 function findRoute(from, to, connections) {
     let work = [{ at: from, via: null }];
     for (let i = 0; i < work.length; i++) {
-        console.log("Work: ", work);
         let { at, via } = work[i];
         for (let next of connections.get(at) || []) {
 
             if (next == to) {
-                console.log("Via: ", via);
                 return via;
             };
             if (!work.some((w) => w.at == next)) {
@@ -198,12 +196,10 @@ console.log("Connections: ", bigOak.state.connections);
 
 
 setTimeout(() => {
-    console.log("\nAfter data processing: ");
-    console.log("Connections: ", bigOak.state.connections);
     console.log("Send reques long distance: ", routeRequest(bigOak, "Church Tower", "note",
         "Incoming jackdaws!"));
     // 1
-}, 3000);
+}, 1000);
 
 // Ahora se pueden enviar notas a larga distancia:
 
@@ -211,25 +207,103 @@ setTimeout(() => {
 
 // Funcion que busca en todos los nodos un mensaje en el almacenamiento y que utiliza formato asyn-await:
 
+requestType("storage", (nest, name) => storage(nest, name));
+
 function network(nest) {
     return Array.from(nest.state.connections.keys());
 }
 
-async function findStorage(nest, name) {
+async function findInStorage(nest, name) {
     let local = await storage(nest, name);
-
     if (local != null) return local;
-    let sources = network(nest).filter(n => n != nest.name);
 
+    let sources = network(nest).filter(n => n != nest.name);
     while (sources.length > 0) {
-        let source = sources[Math.floor(Math.random() * sources.length)];
+        let source = sources[Math.floor(Math.random() *
+            sources.length)];
         sources = sources.filter(n => n != source);
         try {
-            let found = await routeRequest(nest, source, "storage", name);
-            if (found != null) return found
-        } catch (_) { };
-
-        throw new Error("Not found");
-    };
-
+            let found = await routeRequest(nest, source, "storage",
+                name);
+            if (found != null) return found;
+        } catch (_) { }
+    }
+    throw new Error("Not found");
 }
+
+// Ejecutar funcion findInStorage()
+setTimeout(() => {
+    findInStorage(bigOak, "events on 2017-12-21").then(console.log)
+}, 1500);
+
+
+
+
+// Asynchronous Bugs
+
+//  Calcular polluelos sin bug
+function anyStorage(nest, source, name) {
+    if (source == nest.name) return storage(nest, name);
+    else return routeRequest(nest, source, "storage", name);
+}
+
+async function chicksWithBug(nest, year) {
+    let list = "";
+    await Promise.all(network(nest).map(async name => {
+        list += `${name}: ${await anyStorage(nest, name, `chicks in ${year}`)
+            }\n`;
+    }));
+    return list;
+}
+
+
+/*
+Se produce un error asincrónico.
+
+La expresión map se ejecuta antes de que se haya agregado algo a la lista, por lo que cada uno de los operadores += comienza desde un string vacío y termina cuando su recuperación de almacenamiento finaliza (brecha asincrónica),  estableciendo "lista" como una lista de una sola línea, el resultado de agregar su línea al string vacío.
+
+
+*/
+
+setTimeout(() => {
+    console.log("Recuento de polluelos con bug:")
+    chicksWithBug(bigOak, 2017).then(console.log);
+}, 2000);
+
+
+
+/**
+ Esto se puede evitar  retornando las líneas de las promesas mapeadas y llamando a join en el resultado de Promise.all
+    
+ - "Calcular nuevos valores es menos propenso a errores que cambiar  valores existentes."
+ */
+
+//  Calcular polluelos sin bug
+async function chicks(nest, year) {
+    let lines = network(nest).map(async name => {
+        return name + ": " +
+            await anyStorage(nest, name, `chicks in ${year}`);
+    });
+    return (await Promise.all(lines)).join("\n");
+}
+
+setTimeout(() => {
+    console.log("Recuento de polluelos sin bug:")
+    chicks(bigOak, 2018).then(console.log)
+}, 2500)
+
+
+
+// Funcion para encontrar bisturí:
+async function locateScalpel(nest) {
+    let local = await storage(nest, "scalpel");
+    if (local != null) return local;
+
+    let sources = network(nest).filter(n => n != nest.name);
+
+    let next = local;
+}
+
+setTimeout(async () => {
+    console.log("Scalpel:", storage(bigOak, "scalpel").then(console.log));
+},3000);

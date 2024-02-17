@@ -106,8 +106,6 @@ requestType("connections", (nest, externalConnections, source) => {
 });
 
 function broadcastConnections(nest, name, exceptFor = null) {
-    console.log("Nest: ", nest.name, nest.state.connections);
-
     let connectionsObject = Object.fromEntries(nest.state.connections);
     // console.log("Nombre:", nest.name)
     // console.log(nest.state.connections)
@@ -198,6 +196,12 @@ function findInRemoteStorage(nest, name) {
     }
     return next();
 }
+
+
+setTimeout(() => {
+    findInStorage(bigOak, "events on 2017-12-21").then(console.log)
+}, 4000);
+
 
 var Group = class Group {
     constructor() {
