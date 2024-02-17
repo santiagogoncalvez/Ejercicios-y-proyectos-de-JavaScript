@@ -1,24 +1,18 @@
 // Buscar cache de alimento del Gran Roble:
-const { bigOak, defineRequestType, everywhere } = require("./crow-tech");
-const http = require('http');
+const { bigOak, defineRequestType, everywhere } = require("./crow-tech.js");
+const http = require("http");
 
-
+/*
 bigOak.readStorage("food caches", (caches) => {
     let firstCache = caches[0];
     bigOak.readStorage(firstCache, (info) => {
         console.log(info);
     });
 });
-
-
+*/
 
 // Metodo enviar (nombre del nido, tipo de solicitud, contenido, fucion a llamar cuando llega una respuesta).
 // No se puede enviar este mensaje porque no esta definito el tipo de nota:
-console.log("<--------->");
-bigOak.send("Cow Pasture", "note", "Let's caw loudly at 7PM", () =>
-    console.log("Note delivered.")
-);
-
 
 
 // Definir solicitud "nota" en todos los nidos:
@@ -28,9 +22,11 @@ defineRequestType("note", (nest, content, source, done) => {
 });
 
 // Ahora si se puede enviar este tipo de nota:
+/*
 bigOak.send("Cow Pasture", "note", "Let's caw loudly at 7PM", () =>
     console.log("Note delivered.")
 );
+*/
 
 function storage(nest, name) {
     return new Promise((resolve) => {
@@ -38,11 +34,8 @@ function storage(nest, name) {
     });
 }
 
-storage(bigOak, "enemies").then((value) => console.log("Got", value));
+// storage(bigOak, "enemies").then((value) => console.log("Got", value));
 
-
-
-console.log("<--------->");
 //Funcion que envia un mensaje, estructurado con promesas;
 
 // Definir error específico
@@ -70,18 +63,17 @@ function request(nest, target, type, content) {
 function requestType(name, handler) {
     defineRequestType(name, (nest, content, source, callback) => {
         try {
-            Promise.resolve(handler(nest, content, source)).then(
-                (response) => callback(null, response),
-                (failure) => callback(failure)
-            );
+            Promise.resolve(handler(nest, content, source))
+                .then(
+                    (response) => callback(null, response),
+                    (failure) => callback(failure)
+                );
         } catch (exception) {
             callback(exception);
         }
     });
 }
 
-
-console.log("<--------->");
 // Esta funcion verifica los nidos accesibles desde un cierto nido:
 requestType("ping", () => "pong");
 
@@ -92,20 +84,16 @@ function availableNeighbors(nest) {
             () => false
         );
     });
-
     return Promise.all(requests).then((result) => {
         return nest.neighbors.filter((_, i) => result[i]);
     });
 }
 
-
-console.log("<--------->");
 // Funcion que ejecuta codigo en cada nido:
-everywhere(nest => {
+everywhere((nest) => {
     nest.state.gossip = [];
 });
 
-// Funcion que transmite un mensaje a toda la red:
 function sendGossip(nest, message, exceptFor = null) {
     nest.state.gossip.push(message);
     for (let neighbor of nest.neighbors) {
@@ -121,12 +109,8 @@ requestType("gossip", (nest, message, source) => {
 });
 
 // Enviar mensaje a todos los nidos:
-bigOak.send("Cow Pasture", "gossip", "There are wolves nearby", () => { });
-console.log()
+// bigOak.send("Cow Pasture", "gossip", "There are wolves nearby", () => { });
 
-
-
-console.log("<--------->");
 // Definir tipo de mensaje "concections" para evaluar los nidos existentes y alcance de cada uno.
 requestType("connections", (nest, { name, neighbors },
     source) => {
@@ -153,8 +137,6 @@ everywhere(nest => {
     broadcastConnections(nest, nest.name);
 });
 
-everywhere(nest => console.log(nest.state.connections));
-
 
 
 
@@ -163,19 +145,91 @@ everywhere(nest => console.log(nest.state.connections));
 
 function findRoute(from, to, connections) {
     let work = [{ at: from, via: null }];
-
     for (let i = 0; i < work.length; i++) {
+        console.log("Work: ", work);
         let { at, via } = work[i];
         for (let next of connections.get(at) || []) {
-            if (next == to) return via;
-            if (!work.some(w => w.at == next)) {
-                work.push({at: next, via: via || next})
+
+            if (next == to) {
+                console.log("Via: ", via);
+                return via;
+            };
+            if (!work.some((w) => w.at == next)) {
+                work.push({ at: next, via: via || next });
             }
         }
     }
-
     return null;
 }
 
+// Funcion que envia mensajes a larga distancia:
+function routeRequest(nest, target, type, content) {
+    if (nest.neighbors.includes(target)) {
+        return request(nest, target, type, content);
+    } else {
+        let via = findRoute(nest.name, target,
+            nest.state.connections);
+        if (!via) throw new Error(`No route to ${target}`);
+        return request(nest, via, "route",
+            { target, type, content });
+    }
+}
 
 
+requestType("route", (nest, { target, type, content }) => {
+    return routeRequest(nest, target, type, content);
+});
+
+/*
+Se supone que esto tiene que funcionar pero no funciona, porque la funcion que crea el mapa de todas las concexiones no esta guardando el mapa en cada nido y solo guarda la coneccion acutales con los vecinos.
+Y como no existe ese mapa no puede conseguir las conexiones para ir de un lugar a otro la funcion findRoute.
+
+Este error estaba ocurriendo porque intentaba acceder a los datos antes de que se terminaran de procesar, si se accede a las conexiones luego de que todos los nidos difundan las conexiones, si se van a poder mostrar los resultados.
+*/
+
+
+// Esto es lo que sucede si se intenta acceder a las conexiones antes de se terminene de procesar.
+// Por ejemplo calcular las claves de las conecciones o el tamaño del mapa:
+
+console.log("\nBeafore data processing: ");
+console.log("Connections: ", bigOak.state.connections);
+
+// Si se realizan las operaciones luego del proceso de la comunicaccion de las conexiones por parte de la funcion broadcastConnections() los resultados van a ser correctos
+
+
+setTimeout(() => {
+    console.log("\nAfter data processing: ");
+    console.log("Connections: ", bigOak.state.connections);
+    console.log("Send reques long distance: ", routeRequest(bigOak, "Church Tower", "note",
+        "Incoming jackdaws!"));
+    // 1
+}, 3000);
+
+// Ahora se pueden enviar notas a larga distancia:
+
+
+
+// Funcion que busca en todos los nodos un mensaje en el almacenamiento y que utiliza formato asyn-await:
+
+function network(nest) {
+    return Array.from(nest.state.connections.keys());
+}
+
+async function findStorage(nest, name) {
+    let local = await storage(nest, name);
+
+    if (local != null) return local;
+    let sources = network(nest).filter(n => n != nest.name);
+
+    while (sources.length > 0) {
+        let source = sources[Math.floor(Math.random() * sources.length)];
+        sources = sources.filter(n => n != source);
+        try {
+            let found = await routeRequest(nest, source, "storage", name);
+            if (found != null) return found
+        } catch (_) { };
+
+        throw new Error("Not found");
+    };
+
+}

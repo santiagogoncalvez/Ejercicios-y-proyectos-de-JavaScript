@@ -37,13 +37,18 @@ Funcion parecida pero con promesas (Objeto promise):
 
 -Buena practica: clausula de cierre, intentar escribir los peores casos al inicio de las funciones para devolver el error o salir de la funcion.
 
-Resolve es una funcion para informar el caso de resolucion de la promesa.
-Reject es una funcion para informar el caso de rechazo de la promesa.
-*/
+  -Resolve() es una funcion para informar el caso de resolucion de la promesa.
+  Cambia el estado de la promesa de pendienta a resuelta.
+
+  -Reject() es una funcion para informar el caso de rechazo de la promesa.
+  Cambia el estado de la promesa de pendiente a rechazada.
+  */
 
 
 
 // Ejemplo 2
+
+
 
 function getDataWhithPromises() {
   return new Promise((resolve, reject) => {
@@ -58,9 +63,16 @@ function getDataWhithPromises() {
 }
 
 /*  
+    Succes hanlder (contorlador de exito):
     - 'then': es un metodo de promesa que adjunta una devolucion de llamada que se ejecuta cuando se resuelve la promesa.
+    Puede recibir 2 parametros:
+      El primero es la funcion que se va a llamar cuando tenga exito la función.
+      El segundo es la funcion que se va a llamar cuando se rechace la función.
 
+    Failure handler (contorlador de rechazo):
     - 'catch': es es un metodo de promesa que adjunta una devolucion de llamada que se ejecuta cuando se rechace promesa.
+
+
 */
 
 getDataWhithPromises()
