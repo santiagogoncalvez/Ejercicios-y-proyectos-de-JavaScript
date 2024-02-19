@@ -146,12 +146,10 @@ everywhere(nest => {
 function findRoute(from, to, connections) {
     let work = [{ at: from, via: null }];
     for (let i = 0; i < work.length; i++) {
-        console.log("Work: ", work);
         let { at, via } = work[i];
         for (let next of connections.get(at) || []) {
 
             if (next == to) {
-                console.log("Via: ", via);
                 return via;
             };
             if (!work.some((w) => w.at == next)) {
@@ -191,17 +189,18 @@ Este error estaba ocurriendo porque intentaba acceder a los datos antes de que s
 // Esto es lo que sucede si se intenta acceder a las conexiones antes de se terminene de procesar.
 // Por ejemplo calcular las claves de las conecciones o el tamaño del mapa:
 
+/*
 console.log("\nBeafore data processing: ");
 console.log("Connections: ", bigOak.state.connections);
+*/
 
 // Si se realizan las operaciones luego del proceso de la comunicaccion de las conexiones por parte de la funcion broadcastConnections() los resultados van a ser correctos
+// await console.log("Connections: ", bigOak.state.connections);
 
-
-setTimeout(() => {
-    console.log("\nAfter data processing: ");
-    console.log("Connections: ", bigOak.state.connections);
-    console.log("Send reques long distance: ", routeRequest(bigOak, "Church Tower", "note",
-        "Incoming jackdaws!"));
+setTimeout(async () => {
+    console.log("Send request long distance: ");
+    await routeRequest(bigOak, "Church Tower", "note",
+        "Incoming jackdaws!")
     // 1
 }, 3000);
 
@@ -211,25 +210,31 @@ setTimeout(() => {
 
 // Funcion que busca en todos los nodos un mensaje en el almacenamiento y que utiliza formato asyn-await:
 
+requestType("storage", (nest, name) => storage(nest, name));
+
 function network(nest) {
     return Array.from(nest.state.connections.keys());
 }
 
-async function findStorage(nest, name) {
+async function findInStorage(nest, name) {
     let local = await storage(nest, name);
-
     if (local != null) return local;
-    let sources = network(nest).filter(n => n != nest.name);
 
+    let sources = network(nest).filter(n => n != nest.name);
     while (sources.length > 0) {
-        let source = sources[Math.floor(Math.random() * sources.length)];
+        let source = sources[Math.floor(Math.random() *
+            sources.length)];
         sources = sources.filter(n => n != source);
         try {
-            let found = await routeRequest(nest, source, "storage", name);
-            if (found != null) return found
-        } catch (_) { };
-
-        throw new Error("Not found");
-    };
-
+            let found = await routeRequest(nest, source, "storage",
+                name);
+            if (found != null) return found;
+        } catch (_) { }
+    }
+    throw new Error("Not found");
 }
+
+
+
+
+

@@ -152,14 +152,11 @@ function findInStorage(nest, name) {
     });
 }
 
-// routeRequest(bigOak, "Church Tower", "note",
-// "Incoming jackdaws!");
 
 function network(nest) {
     return Array.from(nest.state.connections.keys());
 }
 
-console.log(network(bigOak))
 
 function findInRemoteStorage(nest, name) {
     let sources = network(nest).filter(n => n != nest.name);
