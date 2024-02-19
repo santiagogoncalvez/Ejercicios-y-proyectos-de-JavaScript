@@ -106,8 +106,6 @@ requestType("connections", (nest, externalConnections, source) => {
 });
 
 function broadcastConnections(nest, name, exceptFor = null) {
-    console.log("Nest: ", nest.name, nest.state.connections);
-
     let connectionsObject = Object.fromEntries(nest.state.connections);
     // console.log("Nombre:", nest.name)
     // console.log(nest.state.connections)
@@ -178,10 +176,18 @@ function findInStorage(nest, name) {
     });
 }
 
+<<<<<<< HEAD:Ejercicios-libro-Eloquent-JavaScript/Capitulo-11/lectura-capitulo-copia-2.js
+
+=======
+>>>>>>> dd002422bba3dba1cde89dc1fc301c49282578d7:Ejercicios-Eloquent-JavaScript/Capitulo-11/lectura-capitulo-copia.js
 function network(nest) {
     return Array.from(nest.state.connections.keys());
 }
 
+<<<<<<< HEAD:Ejercicios-libro-Eloquent-JavaScript/Capitulo-11/lectura-capitulo-copia-2.js
+
+=======
+>>>>>>> dd002422bba3dba1cde89dc1fc301c49282578d7:Ejercicios-Eloquent-JavaScript/Capitulo-11/lectura-capitulo-copia.js
 function findInRemoteStorage(nest, name) {
     let sources = network(nest).filter((n) => n != nest.name);
     function next() {
@@ -198,6 +204,12 @@ function findInRemoteStorage(nest, name) {
     }
     return next();
 }
+
+
+setTimeout(() => {
+    findInStorage(bigOak, "events on 2017-12-21").then(console.log)
+}, 4000);
+
 
 var Group = class Group {
     constructor() {

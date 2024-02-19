@@ -197,12 +197,19 @@ console.log("Connections: ", bigOak.state.connections);
 // Si se realizan las operaciones luego del proceso de la comunicaccion de las conexiones por parte de la funcion broadcastConnections() los resultados van a ser correctos
 // await console.log("Connections: ", bigOak.state.connections);
 
+<<<<<<< HEAD:Ejercicios-libro-Eloquent-JavaScript/Capitulo-11/lectura-capitulo.js
 setTimeout(async () => {
     console.log("Send request long distance: ");
     await routeRequest(bigOak, "Church Tower", "note",
         "Incoming jackdaws!")
+=======
+
+setTimeout(() => {
+    console.log("Send reques long distance: ", routeRequest(bigOak, "Church Tower", "note",
+        "Incoming jackdaws!"));
+>>>>>>> dd002422bba3dba1cde89dc1fc301c49282578d7:Ejercicios-Eloquent-JavaScript/Capitulo-11/lectura-capitulo.js
     // 1
-}, 3000);
+}, 1000);
 
 // Ahora se pueden enviar notas a larga distancia:
 
@@ -234,7 +241,86 @@ async function findInStorage(nest, name) {
     throw new Error("Not found");
 }
 
+<<<<<<< HEAD:Ejercicios-libro-Eloquent-JavaScript/Capitulo-11/lectura-capitulo.js
 
 
 
 
+=======
+// Ejecutar funcion findInStorage()
+setTimeout(() => {
+    findInStorage(bigOak, "events on 2017-12-21").then(console.log)
+}, 1500);
+
+
+
+
+// Asynchronous Bugs
+
+//  Calcular polluelos sin bug
+function anyStorage(nest, source, name) {
+    if (source == nest.name) return storage(nest, name);
+    else return routeRequest(nest, source, "storage", name);
+}
+
+async function chicksWithBug(nest, year) {
+    let list = "";
+    await Promise.all(network(nest).map(async name => {
+        list += `${name}: ${await anyStorage(nest, name, `chicks in ${year}`)
+            }\n`;
+    }));
+    return list;
+}
+
+
+/*
+Se produce un error asincrónico.
+
+La expresión map se ejecuta antes de que se haya agregado algo a la lista, por lo que cada uno de los operadores += comienza desde un string vacío y termina cuando su recuperación de almacenamiento finaliza (brecha asincrónica),  estableciendo "lista" como una lista de una sola línea, el resultado de agregar su línea al string vacío.
+
+
+*/
+
+setTimeout(() => {
+    console.log("Recuento de polluelos con bug:")
+    chicksWithBug(bigOak, 2017).then(console.log);
+}, 2000);
+
+
+
+/**
+ Esto se puede evitar  retornando las líneas de las promesas mapeadas y llamando a join en el resultado de Promise.all
+    
+ - "Calcular nuevos valores es menos propenso a errores que cambiar  valores existentes."
+ */
+
+//  Calcular polluelos sin bug
+async function chicks(nest, year) {
+    let lines = network(nest).map(async name => {
+        return name + ": " +
+            await anyStorage(nest, name, `chicks in ${year}`);
+    });
+    return (await Promise.all(lines)).join("\n");
+}
+
+setTimeout(() => {
+    console.log("Recuento de polluelos sin bug:")
+    chicks(bigOak, 2018).then(console.log)
+}, 2500)
+
+
+
+// Funcion para encontrar bisturí:
+async function locateScalpel(nest) {
+    let local = await storage(nest, "scalpel");
+    if (local != null) return local;
+
+    let sources = network(nest).filter(n => n != nest.name);
+
+    let next = local;
+}
+
+setTimeout(async () => {
+    console.log("Scalpel:", storage(bigOak, "scalpel").then(console.log));
+},3000);
+>>>>>>> dd002422bba3dba1cde89dc1fc301c49282578d7:Ejercicios-Eloquent-JavaScript/Capitulo-11/lectura-capitulo.js
