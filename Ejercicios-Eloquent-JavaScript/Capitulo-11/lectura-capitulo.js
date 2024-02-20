@@ -291,45 +291,5 @@ async function chicks(nest, year) {
 setTimeout(() => {
     // console.log("Recuento de polluelos sin bug:")
     // chicks(bigOak, 2018).then(console.log)
-}, 2500)
-
-
-
-// Ejercicio siguiendo el bisturí:
-
-// Funcion para encontrar bisturí:
-async function locateScalpel(nest) {
-    let local = await storage(nest, "scalpel");
-    if (local == nest.name) return local;
-
-    let sources = network(nest).filter(n => n != nest.name);
-    let next = local;
-
-    while (sources.length > 0) {
-        sources = sources.filter(n => n != next);
-        try {
-            let found = await routeRequest(nest, next, "storage",
-                "scalpel");
-            if (found == next) return found;
-            next = found;
-        } catch (_) { }
-    }
-    throw new Error("Not found");
-}
-
-setTimeout(async () => {
-    console.log("Scalpel location:", await locateScalpel(bigOak));
-}, 3000);
-
-
-
-// Solucion del libro
-async function locateScalpel(nest) {
-    let current = nest.name;
-    for (; ;) {
-        let next = await anyStorage(nest, current, "scalpel");
-        if (next == current) return current;
-        current = next;
-    }
-}
+}, 2500);
 
