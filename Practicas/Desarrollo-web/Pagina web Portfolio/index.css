@@ -1,11 +1,11 @@
 /* Fuente que se va a utilizar en toda la pagina */
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Comfortaa', sans-serif;
+    font-family: "Comfortaa", sans-serif;
 }
 
 html {
@@ -14,7 +14,8 @@ html {
 }
 
 #inicio {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url(Imagenes/computadora-portatil-escritorio-diagrama-negocios-ilustracion-isometrica_639772-38.webp);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+        url(Imagenes/computadora-portatil-escritorio-diagrama-negocios-ilustracion-isometrica_639772-38.webp);
     background-size: cover;
     background-position: center center;
     height: 100vh;
@@ -28,7 +29,6 @@ html {
     z-index: 100;
     top: 10;
 }
-
 
 #inicio .contenido header .contenido-header {
     max-width: 1100px;
@@ -45,17 +45,15 @@ html {
     color: rgba(255, 255, 255, 0.883);
     text-align: center;
     font-size: 200%;
-    transform: rotate(.1deg) skew(-30deg);
-    text-shadow: 3px 2px .01px rgb(186, 186, 186);
+    transform: rotate(0.1deg) skew(-30deg);
+    text-shadow: 3px 2px 0.01px rgb(186, 186, 186);
 }
-
 
 #inicio .contenido header .contenido-header div h1:hover {
     color: white;
     transition: 1s;
     cursor: pointer;
 }
-
 
 /* Barra de navegacion */
 /* elementos de la lista */
@@ -76,7 +74,7 @@ html {
 #inicio .contenido header .contenido-header nav ul li:hover {
     color: rgba(158, 179, 194, 1);
     font-size: 108%;
-    transition: .1s;
+    transition: 0.1s;
 }
 
 #inicio .contenido .presentacion {

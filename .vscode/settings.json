@@ -1,13 +1,13 @@
 {
     "editor.fontWeight": "bold",
-    "editor.fontFamily": "Rubik ExtraLight, Fira Code Light, Consolas, 'Courier New', monospace",
+    "editor.fontFamily": " Fira Code Light, Rubik ExtraLight, Consolas, 'Courier New', monospace",
     "editor.fontVariations": true,
     "editor.tabSize": 4,
-    "editor.lineHeight": 22,
+    "editor.lineHeight": 26,
     "chat.editor.lineHeight": 0,
     "terminal.integrated.lineHeight": 1.1,
     "debug.console.lineHeight": 40,
-    "editor.fontSize": 14,
+    "editor.fontSize": 18.5,
     "debug.console.fontFamily": "Consolas",
     "debug.console.fontSize": 14,
     "terminal.integrated.fontWeight": "normal",
@@ -27,5 +27,10 @@
     "editor.cursorWidth": 2,
     "prettier.printWidth": 80,
     "editor.fontLigatures": true,
-    "editor.letterSpacing": 2
+    "editor.letterSpacing": 0,
+    "editor.wordWrap": "bounded",
+    "editor.mouseWheelZoom": true,
+    "window.zoomLevel": 0.5,
+    "window.zoomPerWindow": false,
+    "editor.wordWrapColumn": 90
 }
