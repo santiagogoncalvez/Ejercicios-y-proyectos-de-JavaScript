@@ -1,0 +1,23 @@
+Para escribir codigo limpio:
+Clean code, Robert Martin.
+
+Libro tecnico para algoritmos y profundizacion:
+introduction to algorithms. Ronald L. Rivest, Clifford Stein
+
+Para entender JavaScript de una manera mas simple e inteligente (aprender conceptos mas avanzados de la programacion funcional):
+Funcional JavaScript, O´reilly
+
+Para patrones de javaScript:
+Patterns JavaScript, O´reilly
+
+Paginas web y javaScript desde 0:
+Building Frontend Web Apps with Plain Javascript.
+
+JavaScript, aplicaciones en la web, DOM, node.js, canvas:
+Eloquent JavaScript, Marjin Haverbeke.
+
+Buenas tecnicas en JavaScript:
+Human JavaScript, Henrik Joreteg
+
+JavaScript, Seccion 1: El lenguaje de java Script. Seccion 2: el navegador, documentos, eventos e interfaces. Seccion 3: serie de articulos varios relacionados.
+Javascript Info. Guia de JavaScript en la red.	

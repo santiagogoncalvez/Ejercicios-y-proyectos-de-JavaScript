@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<!-- 
+    El elemento <video> permite incrustar un video.
+        Atributos:
+        🔹src: contiene la ruta del video que se desea incrustar.
+
+        🔹controls: introduce la interfaz de control del browser, o construir la nuestra utilizando la JavaScript API apropiada.
+-->
+
+<video src="video.mp4" controls>Below is a music video example</video>
+
+<!-- El párrafo dentro de la etiqueta <video> se lo llama fallbackcontent y será mostrado si el browser desde el que se está accediendo a la página no soporta el elemento <video> -->
+
+
+<!-- 
+Para proveer varios archivos para una producción multimedia se puede incluir varios elementos source.
+El atributo type especifica el tipo del archivo:
+-->
+<video controls>
+    <source src="video.mp4" type="video/mp4">
+    <source src="video.webm" type="video/webm">
+</video>
+
+<!-- Usar type optimiza tiempo y recursos -->
+
+</body>
+</html>
