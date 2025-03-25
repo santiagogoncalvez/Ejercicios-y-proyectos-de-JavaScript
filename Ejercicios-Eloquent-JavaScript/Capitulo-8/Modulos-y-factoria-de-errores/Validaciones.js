@@ -2,7 +2,7 @@ import {CreateConnectionError, CreateValidationError} from "./Factoria-de-errore
 
 /*
 Crear una clase que va representar un tipo de error, y por este motivo va a ser una extension de la clase Error.
-// Ahora los errores no son tan generales sino que son mas especificos.
+Ahora los errores no son tan generales sino que son mas especificos.
 */
 export const validateUser = ({ name, age, email } = {}) => {
     if (!name) throw new CreateValidationError("name is required");
